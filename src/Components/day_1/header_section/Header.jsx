@@ -1,19 +1,20 @@
 import React from 'react';
-import { 
+import {
     Box,
-    Button, 
-    Flex, 
-    Spacer, 
-    Image, 
-    Avatar, 
-    Switch, 
-    Popover, 
-    PopoverTrigger, 
-    PopoverContent, 
-    PopoverArrow, 
-    PopoverBody , 
-    Icon, 
-    Divider
+    Button,
+    Flex,
+    Spacer,
+    Image,
+    Avatar,
+    Switch,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverArrow,
+    PopoverBody,
+    Icon,
+    Divider,
+    Center
 } from "@chakra-ui/react"
 import { web_logo } from "../../../Images/imageLink"
 import { Link } from 'react-router-dom';
@@ -22,55 +23,60 @@ import { BsPersonCircle } from "react-icons/bs"
 
 const Header = () => {
     return (
-        <Flex minWidth='max-content' alignItems='center' gap='2' border="1px solid" >
-            <Box>
-                <Image
-                    src={web_logo}
-                    alt="Web_logo"
-                    w="100%"
-                    h="40px"
-                />
+        <Flex minWidth='max-content' alignItems='center' gap='2' boxShadow='lg' >
+            <Box mx={5}>
+                <Link to="/">
+                    <Image
+                        src={web_logo}
+                        alt="Web_logo"
+                        w="100%"
+                        h="40px"
+                    />
+                </Link>
             </Box>
-            <Box>
+            <Box py={5} px={3} mx={1} _hover={{ backgroundColor: "rgb(245,245,245)" }}>
                 <Link to="/">Home</Link>
             </Box>
-            <Box>
+            <Box py={5} px={3} mx={1} _hover={{ backgroundColor: "rgb(245,245,245)" }}>
                 <Link to="/donate">Donate</Link>
             </Box>
-            <Box>
+            <Box py={5} px={3} mx={1} _hover={{ backgroundColor: "rgb(245,245,245)" }}>
                 <Link to="/lend">Lend</Link>
             </Box>
-            <Box>
+            <Box py={5} px={3} mx={1} _hover={{ backgroundColor: "rgb(245,245,245)" }}>
                 <Link to="/pricing">Pricing</Link>
             </Box>
-            <Box>
+            <Box py={5} px={3} mx={1} _hover={{ backgroundColor: "rgb(245,245,245)" }}>
                 <Link to="/contact">Contact us</Link>
             </Box>
-            <Box>
-                <Switch colorScheme='red' />
+            <Box py={5} px={3} mx={1}>
+                <Switch size="lg" />
             </Box>
-            <Spacer/>
+            <Spacer />
             <Box>
-                <Button borderRadius="full" px="8">Start a fundaraiser</Button>
+                <Button borderRadius="full" px="8" size="lg">Start a fundaraiser</Button>
             </Box>
-            <Spacer/>
+            <Spacer />
             <Popover>
                 <PopoverTrigger>
-                    <Avatar as="Button" bg='teal.500' h={9} w={9}/>
+                    <Avatar as="Button" h={10} w={10} />
                 </PopoverTrigger>
                 <PopoverContent w="150px">
                     <PopoverArrow />
                     <PopoverBody>
                         <Flex>
-                            <Box>Login</Box>
-                            <Spacer/>
-                            <Divider orientation='vertical' />
-                            <Box>Register</Box>
+                            <Link to="/login">Login</Link>
+                            <Spacer />
+                            <Center height='25px'>
+                                <Divider orientation='vertical' />
+                            </Center>
+                            <Spacer />
+                            <Link to="/register">Register</Link>
                         </Flex>
                     </PopoverBody>
                 </PopoverContent>
             </Popover>
-            <Spacer/>
+            <Spacer />
         </Flex>
     );
 };
