@@ -15,15 +15,15 @@ function Allroutes(props) {
         
         <Routes>
             <Route path='/' element={<Home/>} />
-            <Route path='/donate' element={<Donate/>} />
+            <Route path='/donate' element={
+                <PrivateRoute>
+                    <Donate/>
+                </PrivateRoute>
+            } />
             <Route path='/lend' element={<Lend/>} />
             <Route path='/pricing' element={<Pricing/>} />
             <Route path='/contact' element={<Contact/>} />
-            <Route path='/funding' element={
-                <PrivateRoute>
-                    <Fundraiser/>
-                </PrivateRoute>
-            } />
+            <Route path='/funding' element={<Fundraiser/>} />
             <Route path='/login' element={<Login/>} />
             <Route path='/register' element={<Register/>} />
             <Route path='*' element={<>404 error page</>} />
