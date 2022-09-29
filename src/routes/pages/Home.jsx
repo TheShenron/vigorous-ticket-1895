@@ -1,9 +1,9 @@
 import React from 'react';
-
+import { Heading } from "@chakra-ui/react"
 function Home(props) {
     return (
         <div>
-            <h1>Welcome to Home Page...</h1>
+            <Heading>Welcome to Home Page...</Heading>
         </div>
     );
 }

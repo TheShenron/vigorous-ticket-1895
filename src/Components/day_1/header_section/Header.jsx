@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Box,
     Button,
@@ -14,47 +14,77 @@ import {
     PopoverBody,
     Icon,
     Divider,
-    Center
+    Center,
+    Tooltip,
+    Badge
 } from "@chakra-ui/react"
 import { web_logo } from "../../../Images/imageLink"
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { BsPersonCircle } from "react-icons/bs"
+import styles from "../../../colors.module.css"
 
 
 const Header = () => {
+
+    const [tooltips, setTooltips] = useState(false)
+    const shows = (e) => {
+        console.log(tooltips, e.target.checked)
+        e.target.checked ? setTooltips("USD") : setTooltips("INR")
+    }
+
     return (
         <Flex minWidth='max-content' alignItems='center' gap='2' boxShadow='lg' >
             <Box mx={5}>
-                <Link to="/">
+                <NavLink to="/">
                     <Image
                         src={web_logo}
                         alt="Web_logo"
                         w="100%"
                         h="40px"
                     />
-                </Link>
+                </NavLink>
             </Box>
             <Box py={5} px={3} mx={1} _hover={{ backgroundColor: "rgb(245,245,245)" }}>
-                <Link to="/">Home</Link>
+                <NavLink to="/"
+                    className={({ isActive }) =>
+                        isActive ? styles.linkatv : styles.linkdeatv
+                    }
+                    end
+                >Home</NavLink>
             </Box>
             <Box py={5} px={3} mx={1} _hover={{ backgroundColor: "rgb(245,245,245)" }}>
-                <Link to="/donate">Donate</Link>
+                <NavLink to="/donate"
+                    className={({ isActive }) =>
+                        isActive ? styles.linkatv : styles.linkdeatv
+                    }
+                    end
+                >Donate</NavLink>
             </Box>
             <Box py={5} px={3} mx={1} _hover={{ backgroundColor: "rgb(245,245,245)" }}>
-                <Link to="/lend">Lend</Link>
+                <NavLink to="/lend"
+                    className={({ isActive }) => isActive ? styles.linkatv : styles.linkdeatv}
+                    end
+                >Lend</NavLink>
             </Box>
             <Box py={5} px={3} mx={1} _hover={{ backgroundColor: "rgb(245,245,245)" }}>
-                <Link to="/pricing">Pricing</Link>
+                <NavLink to="/pricing"
+                    className={({ isActive }) => isActive ? styles.linkatv : styles.linkdeatv}
+                    end
+                >Pricing</NavLink>
             </Box>
             <Box py={5} px={3} mx={1} _hover={{ backgroundColor: "rgb(245,245,245)" }}>
-                <Link to="/contact">Contact us</Link>
+                <NavLink to="/contact"
+                    className={({ isActive }) => isActive ? styles.linkatv : styles.linkdeatv}
+                    end
+                >Contact us</NavLink>
             </Box>
             <Box py={5} px={3} mx={1}>
-                <Switch size="lg" />
+                <Switch size="lg" onChange={(e) => shows(e)}/>
+                <Badge mx={1}>{tooltips}</Badge>
             </Box>
             <Spacer />
             <Box>
-                <Button borderRadius="full" px="8" size="lg">Start a fundaraiser</Button>
+                <Button borderRadius="full" px="8" size="lg"> <NavLink to="/funding">Start a fundaraiser</NavLink></Button>
             </Box>
             <Spacer />
             <Popover>
@@ -65,13 +95,13 @@ const Header = () => {
                     <PopoverArrow />
                     <PopoverBody>
                         <Flex>
-                            <Link to="/login">Login</Link>
+                            <NavLink to="/login">Login</NavLink>
                             <Spacer />
                             <Center height='25px'>
                                 <Divider orientation='vertical' />
                             </Center>
                             <Spacer />
-                            <Link to="/register">Register</Link>
+                            <NavLink to="/register">Register</NavLink>
                         </Flex>
                     </PopoverBody>
                 </PopoverContent>
