@@ -135,7 +135,7 @@ function HeroImage(props) {
                     <Spacer/>
                     <Box border="1px" textAlign="center" p={5} borderRadius={10}>
                         <Icon as={BsFillEaselFill} fontSize="2.5rem"/>
-                        <Text fontSize="xl"> Medical</Text>
+                        <Text fontSize="xl"> Medical </Text>
                     </Box>
                     <Spacer/>
                     <Box border="1px" textAlign="center" p={5} borderRadius={10}>
