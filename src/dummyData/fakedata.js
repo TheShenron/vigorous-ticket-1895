@@ -48,4 +48,14 @@ export const cardList = [
         createdby : "Khushoor P...",
         details : "Receive  tax benefits  by donating to this cause"
     },
+
+    {
+        badge : true,
+        image : "https://cimages.milaap.org/milaap/image/upload/c_fill,h_198,w_264/v1663089110/production/images/campaign/565577/IMG_2697_mamr67_1663092105.jpg",
+        title : "Sponsor girls education at Ikhvelos in rural communities of Rajasthan",
+        percent : 78,
+        amount : "6,63,054",
+        createdby : "Sirin Swan..",
+        details : "Receive  tax benefits  by donating to this cause"
+    },
 ]

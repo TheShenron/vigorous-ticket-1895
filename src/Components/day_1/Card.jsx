@@ -5,7 +5,7 @@ import { cardList } from "../../dummyData/fakedata"
 
 const cardDiv = (badge, image, title, percent, amount, createdby, details) => {
     return (
-        <Box w="320px" shadow="md" borderRadius={5}>
+        <Box w="30%" maxW="32%" shadow="md" borderRadius={5} flexGrow={1}>
             <Box position="relative">
                 {badge && <Badge position="absolute" top="0" left="0" variant='subtle' colorScheme='orange'>Default</Badge>}
                 <Image src={image} alt='Dan Abramov' w="full" borderRadius={5} />
@@ -55,7 +55,7 @@ function Card() {
     return (
         <Container maxW="85%" p="0">
 
-            <Flex wrap="wrap" justifyContent="center" gap="50px">
+            <Flex wrap="wrap" gap="30px">
                 {cardList.map(el => {
                     return (
                         cardDiv(el.badge, el.image, el.title, el.percent, el.amount, el.createdby, el.details)
@@ -63,6 +63,9 @@ function Card() {
                 })}
             </Flex>
 
+            <Box>
+                <Text fontSize="lg" textDecoration="underline" textAlign="center" p={5}>See more fundraisers</Text>
+            </Box>
 
         </Container>
     );
