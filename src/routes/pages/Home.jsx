@@ -3,6 +3,8 @@ import React from 'react';
 import HeroImage from "../../Components/day_1/HeroImage"
 import Card from "../../Components/day_1/Card"
 import QRcode from '../../Components/day_2/QRcode';
+import Testimonial from '../../Components/day_2/Testimonial';
+import Footer from '../../Components/day_2/Footer';
 
 function Home(props) {
     return (
@@ -14,6 +16,8 @@ function Home(props) {
             <HeroImage />
             <Card />
             <QRcode/>
+            <Testimonial/>
+            <Footer/>
         </Container>
     );
 }
