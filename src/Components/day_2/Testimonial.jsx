@@ -7,7 +7,7 @@ import { Container, Box, Text, Divider, Icon, Flex, Button, Spacer, Image } from
 
 function Testimonial(props) {
     return (
-        <Container border="1px solid" maxW="full" py={20}>
+        <Container maxW="full" py={20}>
             <Box w="70%" m="auto" textAlign="center">
                 <Text fontSize="2xl" fontWeight="600">What people are saying about Milaap</Text>
 
