@@ -2,7 +2,7 @@
 // import './App.css';
 //MY IMPORT AND EXPORT
 import Allroutes from './routes/Allroutes';
-import Header from "./Components/day_1/header_section/Header"
+import Header from "./Components/day_1/Header"
 
 function App() {
 

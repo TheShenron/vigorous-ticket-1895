@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { web_logo } from "../../Images/imageLink"
+import { NavLink } from 'react-router-dom';
+import styles from "../../colors.module.css"
+
 import {
     Box,
     Button,
@@ -18,23 +22,28 @@ import {
     Tooltip,
     Badge
 } from "@chakra-ui/react"
-import { web_logo } from "../../../Images/imageLink"
-import { Link, NavLink } from 'react-router-dom';
-import { BsPersonCircle } from "react-icons/bs"
-import styles from "../../../colors.module.css"
 
 
 const Header = () => {
 
     const [tooltips, setTooltips] = useState(false)
     const shows = (e) => {
-        console.log(tooltips, e.target.checked)
         e.target.checked ? setTooltips("USD") : setTooltips("INR")
     }
 
     return (
-        <Flex minWidth='max-content' alignItems='center' gap='2' boxShadow='lg' >
-            <Box mx={5}>
+        <Flex
+            as="header"
+            position="fixed"
+            w='100%'
+            alignItems='center'
+            gap='2'
+            boxShadow='lg'
+            top={0}
+            zIndex={1}
+            bg="white">
+            <Box
+                mx={5}>
                 <NavLink to="/">
                     <Image
                         src={web_logo}
@@ -44,47 +53,70 @@ const Header = () => {
                     />
                 </NavLink>
             </Box>
-            <Box py={5} px={3} mx={1} _hover={{ backgroundColor: "rgb(245,245,245)" }}>
+            <Box
+                py={5}
+                px={3}
+                mx={1}
+                _hover={{ backgroundColor: "rgb(245,245,245)" }}>
                 <NavLink to="/"
-                    className={({ isActive }) =>
-                        isActive ? styles.linkatv : styles.linkdeatv
-                    }
+                    className={({ isActive }) => isActive ? styles.linkatv : styles.linkdeatv}
                     end
                 >Home</NavLink>
             </Box>
-            <Box py={5} px={3} mx={1} _hover={{ backgroundColor: "rgb(245,245,245)" }}>
+            <Box
+                py={5}
+                px={3}
+                mx={1}
+                _hover={{ backgroundColor: "rgb(245,245,245)" }}>
                 <NavLink to="/donate"
-                    className={({ isActive }) =>
-                        isActive ? styles.linkatv : styles.linkdeatv
-                    }
+                    className={({ isActive }) => isActive ? styles.linkatv : styles.linkdeatv}
                     end
                 >Donate</NavLink>
             </Box>
-            <Box py={5} px={3} mx={1} _hover={{ backgroundColor: "rgb(245,245,245)" }}>
+            <Box
+                py={5}
+                px={3}
+                mx={1}
+                _hover={{ backgroundColor: "rgb(245,245,245)" }}>
                 <NavLink to="/lend"
                     className={({ isActive }) => isActive ? styles.linkatv : styles.linkdeatv}
                     end
                 >Lend</NavLink>
             </Box>
-            <Box py={5} px={3} mx={1} _hover={{ backgroundColor: "rgb(245,245,245)" }}>
+            <Box
+                py={5}
+                px={3}
+                mx={1}
+                _hover={{ backgroundColor: "rgb(245,245,245)" }}>
                 <NavLink to="/pricing"
                     className={({ isActive }) => isActive ? styles.linkatv : styles.linkdeatv}
                     end
                 >Pricing</NavLink>
             </Box>
-            <Box py={5} px={3} mx={1} _hover={{ backgroundColor: "rgb(245,245,245)" }}>
+            <Box
+                py={5}
+                px={3}
+                mx={1}
+                _hover={{ backgroundColor: "rgb(245,245,245)" }}>
                 <NavLink to="/contact"
                     className={({ isActive }) => isActive ? styles.linkatv : styles.linkdeatv}
                     end
                 >Contact us</NavLink>
             </Box>
-            <Box py={5} px={3} mx={1}>
-                <Switch size="lg" onChange={(e) => shows(e)}/>
+            <Box
+                py={5}
+                px={3}
+                mx={1}>
+                <Switch size="lg" onChange={(e) => shows(e)} />
                 <Badge mx={1}>{tooltips}</Badge>
             </Box>
             <Spacer />
             <Box>
-                <Button borderRadius="full" px="8" size="lg"> <NavLink to="/funding">Start a fundaraiser</NavLink></Button>
+                <Button
+                    borderRadius="full"
+                    px="8"
+                    size="lg"
+                > <NavLink to="/funding">Start a fundaraiser</NavLink></Button>
             </Box>
             <Spacer />
             <Popover>
