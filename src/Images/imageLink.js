@@ -3,3 +3,4 @@ export const HeroImg = "https://cimages.milaap.org/milaap/image/upload/v16559960
 export const QR = "https://assets.milaap.org/assets/app-qrcode-homepage-prod-0a3005c2633fe1444aff0962fa5f5aabe3827b6fbfc6365035c90624187a860f.png"
 export const GooglePlay = "https://assets.milaap.org/assets/play-store-btn-3cb8952867b0552ef1377bf63004d9d6613fd11da71e8446e7e6be1fd61f3182.png"
 export const AppStore = "https://assets.milaap.org/assets/app-store-btn-0ae1713b1521ee08942a97e257b38ac5050a6cf70df4084b3f4ab234e60ea51f.png"
+export const ContactHeroImgage = "https://i0.wp.com/pages.milaap.org/wp-content/uploads/2022/01/Contact_illustration.png?w=328&ssl=1"
