@@ -12,7 +12,7 @@ import { Container, Flex, Box, Text, Button, Icon, Image } from "@chakra-ui/reac
 
 function Footer(props) {
     return (
-        <Container maxW="full" shadow="dark-lg" p="0">
+        <Container maxW="full" shadow="2xl" p="0">
             <Flex px={10} py={20}>
                 <Box w="15%">
                     <Text fontWeight="600">Donate towards</Text>

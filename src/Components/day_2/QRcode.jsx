@@ -10,7 +10,7 @@ import { Box, Button, Container, Flex, Icon, Image, Text } from "@chakra-ui/reac
 function QRcode(props) {
     return (
         <Container maxW="full" mt={10} p="0">
-            <Flex w="90%" m="auto" borderRadius={10} shadow="xs" _hover={{ shadow: "2xl" }}>
+            <Flex w="90%" m="auto" borderRadius={10} shadow="xs" _hover={{ shadow: "xl" }}>
                 <Box w="50%" p={10}>
                     <Image src={QRimage} alt='Dan Abramov' m="auto" w="300px" />
                 </Box>
