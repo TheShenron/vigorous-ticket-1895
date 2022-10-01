@@ -1,10 +1,17 @@
 import React from 'react';
+import LoginComp from '../../Components/day_4/LoginComp';
+import { Container } from '@chakra-ui/react';
+
 
 function Login(props) {
     return (
-        <div>
-            <h1>Welcome to Login Page</h1>
-        </div>
+        <Container
+            mt={70}
+            maxW="full"
+            p="0"
+        >
+           <LoginComp/>
+        </Container>
     );
 }
 

@@ -1,10 +1,17 @@
 import React from 'react';
+import RegisterComp from "../../Components/day_4/RegisterComp"
+import { Container } from '@chakra-ui/react';
+
 
 function Register(props) {
     return (
-        <div>
-            <h1>Welcome to Register Page</h1>
-        </div>
+        <Container
+            mt={70}
+            maxW="full"
+            p="0"
+        >
+            <RegisterComp />
+        </Container>
     );
 }
 
