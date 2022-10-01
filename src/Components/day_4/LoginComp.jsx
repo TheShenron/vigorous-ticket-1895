@@ -4,7 +4,7 @@ import React from 'react';
 function LoginComp(props) {
     return (
         <Container>
-            <h1>Login comp...</h1>
+            <h1>Login comp... start working</h1>
         </Container>
     );
 }
