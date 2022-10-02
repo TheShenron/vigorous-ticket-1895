@@ -1,11 +1,24 @@
 import React from 'react';
+import TextimonialCase from "./TextimonialCase"
 import { BsFillDiamondFill } from "react-icons/bs"
 import { BsArrowLeft } from "react-icons/bs"
 import { BsArrowRight } from "react-icons/bs"
-
+import { IndexOfSlide } from "../../dummyData/sliderData"
 import { Container, Box, Text, Divider, Icon, Flex, Button, Spacer, Image } from "@chakra-ui/react"
+import { useState } from 'react';
+import { useEffect } from 'react';
+
 
 function Testimonial(props) {
+
+    const [count , setCount] = useState(0)
+    const [slide , setSlide] = useState({})
+
+    useEffect(()=>{
+       setSlide( IndexOfSlide(count) )
+    } , [count])
+
+
     return (
         <Container maxW="full" py={20}>
             <Box w="70%" m="auto" textAlign="center">
@@ -21,30 +34,15 @@ function Testimonial(props) {
             </Box>
 
             <Flex w="80%" m="auto" mt={10} align="center">
-                <Button colorScheme='blackAlpha' variant='ghost'> <Icon as={BsArrowLeft} mr={2} /> Prev</Button>
+                <Button colorScheme='blackAlpha' variant='ghost' onClick={
+                    ()=>count === 0 ? setCount(3) : setCount(count-1)
+                    }> <Icon as={BsArrowLeft} mr={2}/> Prev</Button>
                 <Spacer />
-                <Flex w="50%" shadow="md" transform="translateX(50px)">
-                    <Box position="absolute" top="15%" left="-120px" textAlign="center" p={3} bg="white" borderRadius={5} shadow="lg">
-                        <Image
-                            borderRadius='full'
-                            boxSize='100px'
-                            src='https://bit.ly/dan-abramov'
-                            alt='Dan Abramov'
-                            m="auto"
-                            border="1px solid"
-                        />
-                        <Text fontSize="md" fontWeight="500">Pushpa Aman Singh</Text>
-                        <Text fontSize="xs">@pushpaaman</Text>
-                    </Box>
-                    <Box>
-                        <Text p="45px" pl={20} fontSize="lg">
-                            The best news for fundraising in India! Will surely promote this in our network. Anoj Viswanathan, what a fabulous Independence Day gift and perfect timing for #GivingTuesdayIndia -#DaanUtsav campaigns!
-                        </Text>
-                    </Box>
-
-                </Flex>
+                <TextimonialCase image={slide.image} name={slide.name} twitter={slide.twitter} review={slide.review} />
                 <Spacer />
-                <Button colorScheme='blackAlpha' variant='ghost'>Next <Icon as={BsArrowRight} ml={2} /> </Button>
+                <Button colorScheme='blackAlpha' variant='ghost' onClick={()=>{
+                    count === 3 ? setCount(0) : setCount(count+1)
+                }} >Next <Icon as={BsArrowRight} ml={2} /> </Button>
             </Flex>
 
             <Box mt={5}>

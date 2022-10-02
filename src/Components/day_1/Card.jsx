@@ -3,9 +3,9 @@ import React from 'react';
 import { Badge, Box, Center, CircularProgress, CircularProgressLabel, Container, Divider, Flex, Image, Spacer, Text } from "@chakra-ui/react"
 import { cardList } from "../../dummyData/fakedata"
 
-const cardDiv = (badge, image, title, percent, amount, createdby, details) => {
+const cardDiv = (badge, image, title, percent, amount, createdby, details , ind) => {
     return (
-        <Box w="30%" maxW="32%" shadow="md" borderRadius={5} flexGrow={1}>
+        <Box w="30%" maxW="32%" shadow="md" borderRadius={5} flexGrow={1} key={ind+"CardDiv"+Math.random()*10}>
             <Box position="relative">
                 {badge && <Badge position="absolute" top="0" left="0" variant='subtle' colorScheme='orange'>Default</Badge>}
                 <Image src={image} alt='Dan Abramov' w="full" borderRadius={5} />
@@ -56,9 +56,9 @@ function Card() {
         <Container maxW="85%" p="0">
 
             <Flex wrap="wrap" gap="30px">
-                {cardList.map(el => {
+                {cardList.map( (el,ind) => {
                     return (
-                        cardDiv(el.badge, el.image, el.title, el.percent, el.amount, el.createdby, el.details)
+                        cardDiv(el.badge, el.image, el.title, el.percent, el.amount, el.createdby, el.details , ind)
                     )
                 })}
             </Flex>
