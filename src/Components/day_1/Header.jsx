@@ -116,7 +116,9 @@ const Header = () => {
                     borderRadius="full"
                     px="8"
                     size="lg"
-                > <NavLink to="/funding">Start a fundaraiser</NavLink></Button>
+                > <NavLink to="/funding">Start a fundaraiser</NavLink>
+                </Button>
+               
             </Box>
             <Spacer />
             <Popover>

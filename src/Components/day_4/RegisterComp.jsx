@@ -1,13 +1,59 @@
-import React from 'react';
+import React, { useContext, useRef } from 'react';
 import { LoginLogo } from "../../Images/imageLink"
 import { Container, Image, Box, Flex, Text, Button, ButtonGroup, Divider, InputGroup, InputLeftAddon, Input, InputRightAddon, InputRightElement, Center } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppContext } from "../../contextProvider/ContextProvider"
+import axios from "axios"
+import { START_LOGIN, LOGIN_SUCCESS, LOGIN_ERROR } from "../../contextProvider/action"
+
+const getLogin = (e, p) => {
+    return axios({
+        method: "POST",
+        baseURL: "https://reqres.in/api/login",
+        data: {
+            email: "eve.holt@reqres.in",
+            password: p
+        }
+    })
+}
 
 
 function RegisterComp(props) {
 
+
+    const navigate = useNavigate()
+
+    const { state, dispatch } = useContext(AppContext)
+
+    const email = useRef(null)
+    const pass = useRef(null)
+
     const [show, setShow] = React.useState(false)
     const handleClick = () => setShow(!show)
+
+    const HandleLogin = () => {
+        if (email.current.value != "" && pass.current.value != "") {
+            dispatch({ type: START_LOGIN })
+            let e = email.current.value
+            let p = pass.current.value
+            getLogin(e, p)
+                .then(d => {
+                    dispatch({ type: LOGIN_SUCCESS, payload: d.data.token })
+                    console.log(d)
+                    navigate("/")
+                })
+
+                .catch(err => {
+                    dispatch({ type: LOGIN_ERROR, payload: err })
+                    console.log(err)
+                })
+                .finally(() => console.log("LoginREQ Done"))
+        } else {
+            alert("Fill All The Fields!")
+        }
+    }
+
+
 
     return (
         <Container maxW='full'>
@@ -36,10 +82,10 @@ function RegisterComp(props) {
 
                         <Box w="50%" m="auto" mt={10} >
 
-                            <Input placeholder='Name' mb={5}/>
+                            <Input placeholder='Name' mb={5} />
 
                             <InputGroup size='md'>
-                                <Input placeholder='Mobile number / Email ID' />
+                                <Input placeholder='Mobile number / Email ID' ref={email}/>
                                 <InputRightAddon as="button" children='Get otp' bg="white" />
                             </InputGroup>
 
@@ -48,6 +94,7 @@ function RegisterComp(props) {
                                     pr='4.5rem'
                                     type={show ? 'text' : 'password'}
                                     placeholder='Enter password'
+                                    ref={pass}
                                 />
                                 <InputRightElement width='4.5rem'>
                                     <Button h='1.75rem' size='sm' onClick={handleClick}>
@@ -57,7 +104,13 @@ function RegisterComp(props) {
                             </InputGroup>
 
                             <Box mt={10}>
-                                <Button borderRadius="full" w="full">Register</Button>
+                                <Button
+                                    borderRadius="full"
+                                    w="full"
+                                    isLoading={state.loading}
+                                    loadingText='Checking'
+                                    onClick={HandleLogin}
+                                >Register</Button>
                             </Box>
 
                         </Box>
