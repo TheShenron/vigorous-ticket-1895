@@ -35,11 +35,14 @@ function HeroImage(props) {
                     mt={10}
                     _hover="null"
                     _active="null"
-                >Get started with Milaap360 and win big this Daan Utsav <Icon
+                >
+                    Get started with Milaap360 and win big this Daan Utsav
+                    <Icon
                         as={BsArrowRightCircleFill} ml={3}
                         fontSize="1.5rem"
                         color="blackAlpha.800"
-                    /></Button>
+                    />
+                </Button>
             </Box>
 
 
@@ -127,24 +130,24 @@ function HeroImage(props) {
                     <Button size="lg" borderRadius="0 100px 100px 0"> <Icon as={BsSearch} /> </Button>
                 </Flex>
 
-                <Flex w="60%" m="auto" mt={10}>  
+                <Flex w="60%" m="auto" mt={10}>
                     <Box border="1px" textAlign="center" p={5} borderRadius={10}>
                         <Icon as={BsHeartFill} fontSize="2.5rem" />
                         <Text fontSize="xl"> Non-profits</Text>
                     </Box>
-                    <Spacer/>
+                    <Spacer />
                     <Box border="1px" textAlign="center" p={5} borderRadius={10}>
-                        <Icon as={BsFillEaselFill} fontSize="2.5rem"/>
+                        <Icon as={BsFillEaselFill} fontSize="2.5rem" />
                         <Text fontSize="xl"> Medical </Text>
                     </Box>
-                    <Spacer/>
+                    <Spacer />
                     <Box border="1px" textAlign="center" p={5} borderRadius={10}>
-                        <Icon as={BsSunFill} fontSize="2.5rem"/>
+                        <Icon as={BsSunFill} fontSize="2.5rem" />
                         <Text fontSize="xl"> Memorial</Text>
                     </Box>
-                    <Spacer/>
+                    <Spacer />
                     <Box border="1px" textAlign="center" p={5} borderRadius={10}>
-                        <Icon as={BsReddit} fontSize="2.5rem"/>
+                        <Icon as={BsReddit} fontSize="2.5rem" />
                         <Text fontSize="xl"> 15-others</Text>
                     </Box>
 

@@ -9,6 +9,7 @@ import Contact from "./pages/Contact";
 import Fundraiser from "./pages/Fundraiser";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ERRORPAGE from './pages/ERRORPAGE';
 
 function Allroutes(props) {
     return (
@@ -26,7 +27,7 @@ function Allroutes(props) {
             <Route path='/funding' element={<Fundraiser/>} />
             <Route path='/login' element={<Login/>} />
             <Route path='/register' element={<Register/>} />
-            <Route path='*' element={<>404 error page</>} />
+            <Route path='*' element={<ERRORPAGE/>} />
 
         </Routes>
     );

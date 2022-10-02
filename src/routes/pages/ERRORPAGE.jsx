@@ -1,17 +1,17 @@
 import React from 'react';
-import PageInPro from "../../Components/ErrorPage/PageInPro"
+import E404 from '../../Components/ErrorPage/E404';
 import { Container } from '@chakra-ui/react';
 
-function Pricing(props) {
+function ERRORPAGE(props) {
     return (
         <Container
             mt={70}
             maxW="full"
             p="0"
         >
-            <PageInPro/>
+            <E404 />
         </Container>
     );
 }
 
-export default Pricing;
+export default ERRORPAGE;
