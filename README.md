@@ -1,5 +1,5 @@
 
-# ![](https://assets.milaap.org/assets/favicon-edd25c979c630ceb92a4d0053be394ba98d0edab24f517afd1a77f41fe81a0bd.ico) Milaap.com Clone
+# ![](https://assets.milaap.org/assets/favicon-edd25c979c630ceb92a4d0053be394ba98d0edab24f517afd1a77f41fe81a0bd.ico) Milaap.org Clone
 
  We enable anyone across India to raise funds for medical, environmental, educational, memorial, animal welfare, sports, community causes and more
 
