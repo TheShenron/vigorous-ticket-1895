@@ -26,7 +26,7 @@ export const reducer = (state, action) => {
         case "LOGOUT":
             return {
                 user: {
-                    avatar: ""
+                    avatar: "https://bit.ly/broken-link"
                 },
                 isAuth: false,
                 token: null,

@@ -1,6 +1,6 @@
 export const initialVal = {
     user : {
-        avatar : ""
+        avatar : "https://bit.ly/broken-link"
     },
     isAuth : false,
     token : null,

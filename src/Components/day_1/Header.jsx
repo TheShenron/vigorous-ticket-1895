@@ -127,7 +127,7 @@ const Header = () => {
             <Spacer />
             <Popover>
                 <PopoverTrigger>
-                    <Avatar as="Button" h={10} w={10} src={state.isAuth ? state.user.avatar : ""} />
+                    <Avatar as="Button" h={10} w={10} src={state.user.avatar} />
                 </PopoverTrigger>
                 <PopoverContent w="150px">
                     <PopoverArrow />
