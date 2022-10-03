@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { web_logo } from "../../Images/imageLink"
 import { NavLink } from 'react-router-dom';
 import styles from "../../colors.module.css"
+import { AppContext } from "../../contextProvider/ContextProvider"
+import { LOGOUT } from '../../contextProvider/action';
 
 import {
     Box,
@@ -25,6 +27,8 @@ import {
 
 
 const Header = () => {
+
+    const { state , dispatch } = useContext(AppContext)
 
     const [tooltips, setTooltips] = useState(false)
     const shows = (e) => {
@@ -118,25 +122,35 @@ const Header = () => {
                     size="lg"
                 > <NavLink to="/funding">Start a fundaraiser</NavLink>
                 </Button>
-               
+
             </Box>
             <Spacer />
             <Popover>
                 <PopoverTrigger>
-                    <Avatar as="Button" h={10} w={10} />
+                    <Avatar as="Button" h={10} w={10} src={state.isAuth ? state.user.avatar : ""} />
                 </PopoverTrigger>
                 <PopoverContent w="150px">
                     <PopoverArrow />
                     <PopoverBody>
-                        <Flex>
-                            <NavLink to="/login">Login</NavLink>
-                            <Spacer />
-                            <Center height='25px'>
-                                <Divider orientation='vertical' />
-                            </Center>
-                            <Spacer />
-                            <NavLink to="/register">Register</NavLink>
-                        </Flex>
+                        {state.isAuth ? (
+                            <Flex>
+                                <Spacer />
+                                <NavLink onClick={()=>{
+                                    dispatch({type : LOGOUT})
+                                }} to="/">Logout</NavLink>
+                                <Spacer />
+                            </Flex>
+                        ) : (
+                            <Flex>
+                                <NavLink to="/login">Login</NavLink>
+                                <Spacer />
+                                <Center height='25px'>
+                                    <Divider orientation='vertical' />
+                                </Center>
+                                <Spacer />
+                                <NavLink to="/register">Register</NavLink>
+                            </Flex>
+                        )}
                     </PopoverBody>
                 </PopoverContent>
             </Popover>

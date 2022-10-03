@@ -1,28 +1,40 @@
-export const reducer = (state , action)=>{
+export const reducer = (state, action) => {
 
-    switch (action.type){
-        case "START_LOGIN" : 
+    switch (action.type) {
+        case "START_LOGIN":
             return {
                 ...state,
-                loading : true
+                loading: true
             }
 
-        case "LOGIN_SUCCESS" : 
+        case "LOGIN_SUCCESS":
             return {
                 ...state,
-                isAuth : true,
-                token : action.payload,
-                loading : false
+                isAuth: true,
+                token: action.payload.token,
+                user: { ...state.user, avatar: action.payload.avatar },
+                loading: false
             }
 
-        case "LOGIN_ERROR" : 
+        case "LOGIN_ERROR":
             return {
                 ...state,
-                loading : false,
-                error : action.payload
+                loading: false,
+                error: action.payload
             }
 
-        default :
+        case "LOGOUT":
+            return {
+                user: {
+                    avatar: ""
+                },
+                isAuth: false,
+                token: null,
+                loading: false,
+                error: ""
+            }
+
+        default:
             return state
     }
 
