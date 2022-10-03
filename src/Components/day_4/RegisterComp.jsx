@@ -1,6 +1,6 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef , useState } from 'react';
 import { LoginLogo } from "../../Images/imageLink"
-import { Container, Image, Box, Flex, Text, Button, ButtonGroup, Divider, InputGroup, InputLeftAddon, Input, InputRightAddon, InputRightElement, Center } from '@chakra-ui/react';
+import { Container, Image, Box, Flex, Text, Button, ButtonGroup, Divider, InputGroup, InputLeftAddon, Input, InputRightAddon, InputRightElement, Center, TagLabel, FormLabel, Avatar } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from "../../contextProvider/ContextProvider"
 import axios from "axios"
@@ -24,7 +24,7 @@ function RegisterComp(props) {
     const navigate = useNavigate()
 
     const { state, dispatch } = useContext(AppContext)
-
+    const [UserIMG , setUserIMG] = useState("")
     const email = useRef(null)
     const pass = useRef(null)
 
@@ -38,8 +38,7 @@ function RegisterComp(props) {
             let p = pass.current.value
             getLogin(e, p)
                 .then(d => {
-                    dispatch({ type: LOGIN_SUCCESS, payload: d.data.token })
-                    console.log(d)
+                    dispatch({ type: LOGIN_SUCCESS, payload: {token : d.data.token , avatar : URL.createObjectURL(UserIMG[0])} })
                     navigate("/")
                 })
 
@@ -80,12 +79,19 @@ function RegisterComp(props) {
                         <Text fontSize="sm" color="gray.500" >Sign up & manage fundraisers,</Text>
                         <Text fontSize="sm" color="gray.500" >donations & more</Text>
 
-                        <Box w="50%" m="auto" mt={10} >
+                        <Box w="50%" m="auto" mt={5} >
+
+                            <Box my={5}>
+                                <FormLabel m="auto" w="min-content" htmlFor="USERPIC" textAlign="center" cursor="pointer">
+                                    <Avatar src={UserIMG && UserIMG.length && URL.createObjectURL(UserIMG[0])} size='xl'/>
+                                </FormLabel>
+                                <Input type="file" id="USERPIC" accept="image/*" display="none" onChange={(e)=>setUserIMG(e.target.files)} />
+                            </Box>
 
                             <Input placeholder='Name' mb={5} />
 
                             <InputGroup size='md'>
-                                <Input placeholder='Mobile number / Email ID' ref={email}/>
+                                <Input placeholder='Mobile number / Email ID' ref={email} />
                                 <InputRightAddon as="button" children='Get otp' bg="white" />
                             </InputGroup>
 

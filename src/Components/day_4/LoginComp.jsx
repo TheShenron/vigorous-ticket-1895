@@ -4,7 +4,7 @@ import { Container, Image, Box, Flex, Text, Button, ButtonGroup, Divider, InputG
 import { Link , useNavigate } from 'react-router-dom';
 import { AppContext } from "../../contextProvider/ContextProvider"
 import axios from "axios"
-import {START_LOGIN , LOGIN_SUCCESS , LOGIN_ERROR } from "../../contextProvider/action"
+import {START_LOGIN , LOGIN_SUCCESS , LOGIN_ERROR  } from "../../contextProvider/action"
 
 const getLogin = (e, p) => {
     return axios({
@@ -36,8 +36,7 @@ function LoginComp(props) {
             let p = pass.current.value
             getLogin(e,p)
             .then(d=>{
-                dispatch({type : LOGIN_SUCCESS , payload : d.data.token})
-                console.log(d)
+                dispatch({type : LOGIN_SUCCESS , payload : {token : d.data.token , avatar : ""}})
                  navigate("/")
             })
                
