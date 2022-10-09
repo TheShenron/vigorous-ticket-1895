@@ -1,10 +1,21 @@
 import React, { useContext, useRef } from 'react';
 import { LoginLogo } from "../../Images/imageLink"
-import { Container, Image, Box, Flex, Text, Button, ButtonGroup, Divider, InputGroup, InputLeftAddon, Input, InputRightAddon, InputRightElement, Center } from '@chakra-ui/react';
-import { Link , useNavigate } from 'react-router-dom';
+import { Container, Image, Box, Flex, Text, Button, ButtonGroup, Divider, InputGroup, InputLeftAddon, Input, InputRightAddon, InputRightElement, Center, Icon } from '@chakra-ui/react';
+import { Link, useNavigate } from 'react-router-dom';
 import { AppContext } from "../../contextProvider/ContextProvider"
 import axios from "axios"
-import {START_LOGIN , LOGIN_SUCCESS , LOGIN_ERROR  } from "../../contextProvider/action"
+import { START_LOGIN, LOGIN_SUCCESS, LOGIN_ERROR } from "../../contextProvider/action"
+
+// import { GoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
+// import jwt_decode from "jwt-decode";
+
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { BsFacebook } from "react-icons/bs"
+import { BsGoogle } from "react-icons/bs"
 
 const getLogin = (e, p) => {
     return axios({
@@ -31,23 +42,49 @@ function LoginComp(props) {
 
     const HandleLogin = () => {
         if (email.current.value != "" && pass.current.value != "") {
-            dispatch({type:START_LOGIN})
+            dispatch({ type: START_LOGIN })
             let e = email.current.value
             let p = pass.current.value
-            getLogin(e,p)
-            .then(d=>{
-                dispatch({type : LOGIN_SUCCESS , payload : {token : d.data.token , avatar : ""}})
-                 navigate("/")
-            })
-               
-            .catch(err=>{
-                dispatch({type : LOGIN_ERROR , payload : err})
-                console.log(err)
-            })
-            .finally(()=>console.log("LoginREQ Done"))
+            getLogin(e, p)
+                .then(d => {
+                    dispatch({ type: LOGIN_SUCCESS, payload: { token: d.data.token, avatar: "" } })
+                    navigate("/")
+                })
+
+                .catch(err => {
+                    dispatch({ type: LOGIN_ERROR, payload: err })
+                    console.log(err)
+                })
+                .finally(() => console.log("LoginREQ Done"))
         } else {
             alert("Fill All The Fields!")
         }
+    }
+
+
+    const HandleLoginWithGoogle = useGoogleLogin({
+        // onSuccess: tokenResponse => console.log(tokenResponse),
+        onSuccess: async tokenResponse => {
+            try {
+                const getdata = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+                    headers: {
+                        "Authorization": `Bearer ${tokenResponse.access_token}`
+                    }
+                })
+                console.log(getdata)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+    });
+
+    const responseFacebook = (response) => {
+        console.log(response);
+    }
+
+    const componentClicked = d => {
+        console.log(d)
     }
 
     return (
@@ -74,8 +111,29 @@ function LoginComp(props) {
                     <Box w="75%" textAlign="center">
                         <Text fontSize="md" color="gray.500" >Quickly login using</Text>
                         <ButtonGroup gap='4' mt={4}>
-                            <Button colorScheme="facebook" borderRadius="full" >Facebook</Button>
-                            <Button colorScheme="orange" borderRadius="full" >Google</Button>
+                            {/* <Button colorScheme="facebook" borderRadius="full" >Facebook</Button> */}
+                            <Button colorScheme="red"
+                                onClick={HandleLoginWithGoogle}
+                            > <Icon as={BsGoogle} fontSize="2xl" mr={2}/>Login with Google</Button>
+                            {/* <GoogleLogin
+                                onSuccess={credentialResponse => {
+                                    console.log(credentialResponse);
+                                    console.log(jwt_decode(credentialResponse.credential))
+                                }}
+                                onError={() => {
+                                    console.log('Login Failed');
+                                }}
+                            /> */}
+                            <FacebookLogin
+                                appId="1188446452093209"
+                                // autoLoad={true}
+                                fields="name,email,picture"
+                                onClick={responseFacebook}
+                                callback={componentClicked}
+                                render={renderProps => (
+                                    <Button colorScheme="facebook" onClick={renderProps.onClick}><Icon as={BsFacebook} fontSize="2xl" mr={2}/> Login with Facebook</Button>
+                                  )}
+                            />
                         </ButtonGroup>
                         <Flex justify="center" w="30%" m="auto" mt={5}>
                             <Divider orientation='horizontal' w="40%" m="auto" />
