@@ -2,7 +2,13 @@ import React from 'react';
 import { Box, Button, ButtonGroup, Divider, Flex, Input, Text, Select } from '@chakra-ui/react';
 
 
-function Filter(props) {
+function Filter({ sortLtH }) {
+
+    const HandleSort = (order) => {
+        sortLtH(order)
+    }
+
+
     return (
         <>
 
@@ -15,10 +21,11 @@ function Filter(props) {
                     <Divider />
                     <Box my={5}>
                         <Text fontSize="md" my={3}>PRICE</Text>
-                        <ButtonGroup size="sm" variant='outline'>
-                            <Button>Low To High</Button>
-                            <Button>High To Low</Button>
-                        </ButtonGroup>
+                        <Flex flexWrap="wrap" gap={2}>
+                            <Button size="sm" onClick={() => HandleSort("def")}>Default</Button>
+                            <Button size="sm" onClick={() => HandleSort("lth")}>Low To High</Button>
+                            <Button size="sm" onClick={() => HandleSort("htl")} >High To Low</Button>
+                        </Flex>
                     </Box>
                     <Box my={5}>
                         <Text fontSize="md" my={3}>RATING</Text>

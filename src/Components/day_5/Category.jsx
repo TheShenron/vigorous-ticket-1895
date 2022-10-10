@@ -18,7 +18,9 @@ function Category(props) {
 
     const dispatch = useDispatch()
 
+    const [origin , setOrigin] = useState([])
     const [Resdata, setResData] = useState([])
+    const [sortOrder, setsortOrder] = useState("def")
 
     const [page, setPage] = useState(1)
 
@@ -26,12 +28,51 @@ function Category(props) {
         setPage(p)
     }
 
+    const sortLtH = (order) => {
+        // Resdata.data.sort((a,b)=>a.price - b.price)
+        // console.log(origin)
+        if (order === "def") {
+            // console.log("default")
+            setResData([...origin])
+            setsortOrder("deault wala value")
+
+        } else if (order === "lth") {
+
+            // console.log("low to heigh")
+            setResData([...Resdata].sort((a, b) => a.price - b.price))
+            setsortOrder("htl")
+
+        } else if (order === "htl") {
+            
+            // console.log("heigh to low")
+            setResData([...Resdata].sort((a, b) => b.price - a.price))
+            setsortOrder("lth")
+
+        } else {
+
+            console.log("Something gets worng")
+
+        }
+    }
+
+
+    const Searchitem = (val)=>{
+        let Resdata =[...origin]
+        let OutData = Resdata.filter((el)=>{
+            console.log(el.title.toLowerCase())
+            return el.title.toLowerCase().includes(val.toLowerCase() )
+        })
+        setResData(OutData)
+    }
+
+
+
     useEffect(() => {
         setResData([])
         axios.get(`https://api.escuelajs.co/api/v1/products?offset=${page}&limit=15`)
             .then(d => {
-                console.log(d)
-                setResData(d)
+                setOrigin(d.data)
+                setResData(d.data)
             })
             .catch(err => console.log(err))
             .finally(() => console.log("ReqDone"))
@@ -45,18 +86,18 @@ function Category(props) {
 
             <DonateBanner />
 
-            <SelectCategory/>
+            <SelectCategory HandlePage={(x) => HandlePage(x)} Searchitem={(val)=>Searchitem(val)}/>
 
 
             <Flex>
 
-                <Filter/>
+                <Filter sortLtH={(order) => sortLtH(order)} />
 
                 <Flex w="75%" flexWrap="wrap" gap={"15px"} mb={10}>
                     {Resdata.length === 0 ?
                         <h1>Loading</h1>
                         :
-                        Resdata.data && Resdata.data.map((el, ind) => {
+                        Resdata.map((el, ind) => {
                             return <Product_card
                                 key={ind + "!@#"}
                                 image={el.images[0]}
@@ -70,7 +111,7 @@ function Category(props) {
             </Flex>
 
 
-            <Pagination totalPage={6} currentPage={page} HandlePage={(p) => HandlePage(p)} />
+            <Pagination totalPage={20} currentPage={page} HandlePage={(p) => HandlePage(p)} />
 
         </Box>
     );
@@ -79,51 +120,3 @@ function Category(props) {
 
 export default Category;
 
-/*
-
-category
-: 
-id
-: 
-1
-image
-: 
-"https://api.lorem.space/image/fashion?w=640&h=480&r=3838"
-name
-: 
-"Clothes"
-[[Prototype]]
-: 
-Object
-description
-: 
-"The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J"
-id
-: 
-2
-images
-: 
-Array(3)
-0
-: 
-"https://api.lorem.space/image/fashion?w=640&h=480&r=6362"
-1
-: 
-"https://api.lorem.space/image/fashion?w=640&h=480&r=8544"
-2
-: 
-"https://api.lorem.space/image/fashion?w=640&h=480&r=6801"
-length
-: 
-3
-[[Prototype]]
-: 
-Array(0)
-price
-: 
-828
-title
-: 
-"Tasty Metal Ball"
-
-*/
