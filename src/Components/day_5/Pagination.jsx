@@ -11,29 +11,29 @@ const createPage = (totalPage , currentPage , HandlePage)=>{
         for(let x = 1 ; x <= totalPage ; x++){
             if(x === 1){
                 if(x === currentPage){
-                    arr.push( <Button size="sm" disabled borderRadius="0" >{x}</Button> )
+                    arr.push( <Button key={x+"BTN"} size="sm" disabled borderRadius="0" >{x}</Button> )
                 }else{
-                    arr.push( <Button size="sm" borderRadius="0" onClick={()=>HandlePage(x)} >{x}</Button> )
+                    arr.push( <Button key={x+"BTN"} size="sm" borderRadius="0" onClick={()=>HandlePage(x)} >{x}</Button> )
                 }
             }else if(x === totalPage ){
                 if(x === currentPage){
-                    arr.push( <Button size="sm" disabled borderRadius="0" >{x}</Button> )
+                    arr.push( <Button key={x+"BTN"} size="sm" disabled borderRadius="0" >{x}</Button> )
                 }else{
-                    arr.push( <Button size="sm" borderRadius="0" onClick={()=>HandlePage(x)} >{x}</Button> )
+                    arr.push( <Button key={x+"BTN"} size="sm" borderRadius="0" onClick={()=>HandlePage(x)} >{x}</Button> )
                 }
             }else if(x - 1 === currentPage){
-                arr.push( <Button size="sm" borderRadius="0" onClick={()=>HandlePage(x)} >{x}</Button> )
+                arr.push( <Button key={x+"BTN"} size="sm" borderRadius="0" onClick={()=>HandlePage(x)} >{x}</Button> )
             }else if(x === currentPage){
-                arr.push( <Button size="sm" disabled borderRadius="0" onClick={()=>HandlePage(x)} >{x}</Button> )
+                arr.push( <Button key={x+"BTN"} size="sm" disabled borderRadius="0" onClick={()=>HandlePage(x)} >{x}</Button> )
             }else if(x + 1 === currentPage ) {
-                arr.push( <Button size="sm" borderRadius="0" onClick={()=>HandlePage(x)} >{x}</Button> )
+                arr.push( <Button key={x+"BTN"} size="sm" borderRadius="0" onClick={()=>HandlePage(x)} >{x}</Button> )
             }else if(x > 1 && x <= currentPage - 2){
                 x = currentPage-2
-                arr.push( <Button size="sm" borderRadius="0" >...</Button> )
+                arr.push( <Button key={x+"BTN"} size="sm" borderRadius="0" >...</Button> )
                 
             }else if(x > currentPage + 2 && x < totalPage-1){
                 x = totalPage - 2
-                arr.push( <Button size="sm" borderRadius="0" >...</Button> )
+                arr.push( <Button key={x+"BTN"} size="sm" borderRadius="0" >...</Button> )
                
             }
 
@@ -43,9 +43,9 @@ const createPage = (totalPage , currentPage , HandlePage)=>{
     }else{
         return Arr.map((_,ind)=>{
             if(ind+1 === currentPage){
-                return <Button disabled size="sm" borderRadius="0" >{ind+1}</Button>
+                return <Button key={ind+"BTN"} disabled size="sm" borderRadius="0" >{ind+1}</Button>
             }else{
-                return <Button size="sm" borderRadius="0" onClick={()=>HandlePage(ind+1)} >{ind+1}</Button>
+                return <Button key={ind+"BTN"} size="sm" borderRadius="0" onClick={()=>HandlePage(ind+1)} >{ind+1}</Button>
             }
             
         })

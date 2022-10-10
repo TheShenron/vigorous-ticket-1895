@@ -1,9 +1,27 @@
 import { Badge, Box, Button, Image } from '@chakra-ui/react';
-import React from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import StarIcon from './StarIcon';
+import { add } from "../../store/cartSlice"
+import { useDispatch } from "react-redux"
+import { AppContext } from "../../contextProvider/ContextProvider"
 
-function Product_card({image , title , price , stars = parseInt( ( Math.random()*6 ) + 1) , reviewCount = parseInt( ( Math.random()*1001 ) + 1) }) {
+function Product_card({image , title , price , stars = parseInt( ( Math.random()*6 ) + 1) , reviewCount = parseInt( ( Math.random()*1001 ) + 1) , arr }) {
     
+    const dispatch = useDispatch()
+    const { state } = useContext(AppContext)
+    const navigate = useNavigate()
+    // console.log(state)
+
+    const HandleCart = (val)=>{
+        if(state.isAuth===false){
+            navigate("/login")
+        }else{
+            dispatch(add(val))
+        }
+    }
+
+
     return (
         <>
             <Box maxW='sm' width="25%" flexGrow={1} borderWidth='1px' borderRadius='lg' overflow='hidden'>
@@ -48,7 +66,7 @@ function Product_card({image , title , price , stars = parseInt( ( Math.random()
                         </Box>
                     </Box>
                     <Box mt="2">
-                        <Button colorScheme="teal" size="sm">Donate</Button>
+                        <Button colorScheme="teal" size="sm" onClick={()=>HandleCart(arr)}>Donate</Button>
                     </Box>
                 </Box>
             </Box>

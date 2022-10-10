@@ -71,20 +71,25 @@ function LoginComp(props) {
                         "Authorization": `Bearer ${tokenResponse.access_token}`
                     }
                 })
-                console.log(getdata)
+                // console.log(getdata.data.sub, getdata.data.picture)
+                dispatch({ type: LOGIN_SUCCESS, payload: { token: getdata.data.sub, avatar: getdata.data.picture } })
+                navigate("/")
             } catch (error) {
                 console.log(error)
+                dispatch({ type: LOGIN_ERROR, payload: error })
             }
         }
 
     });
 
     const responseFacebook = (response) => {
-        console.log(response);
+        // console.log(response);
     }
 
     const componentClicked = d => {
-        console.log(d)
+        // console.log(d , "Asdf")
+        dispatch({ type: LOGIN_SUCCESS, payload: { token: d.accessToken, avatar: d.picture.data.url } })
+        navigate("/")
     }
 
     return (
@@ -114,7 +119,7 @@ function LoginComp(props) {
                             {/* <Button colorScheme="facebook" borderRadius="full" >Facebook</Button> */}
                             <Button colorScheme="red"
                                 onClick={HandleLoginWithGoogle}
-                            > <Icon as={BsGoogle} fontSize="2xl" mr={2}/>Login with Google</Button>
+                            > <Icon as={BsGoogle} fontSize="2xl" mr={2} />Login with Google</Button>
                             {/* <GoogleLogin
                                 onSuccess={credentialResponse => {
                                     console.log(credentialResponse);
@@ -131,8 +136,8 @@ function LoginComp(props) {
                                 onClick={responseFacebook}
                                 callback={componentClicked}
                                 render={renderProps => (
-                                    <Button colorScheme="facebook" onClick={renderProps.onClick}><Icon as={BsFacebook} fontSize="2xl" mr={2}/> Login with Facebook</Button>
-                                  )}
+                                    <Button colorScheme="facebook" onClick={renderProps.onClick}><Icon as={BsFacebook} fontSize="2xl" mr={2} /> Login with Facebook</Button>
+                                )}
                             />
                         </ButtonGroup>
                         <Flex justify="center" w="30%" m="auto" mt={5}>

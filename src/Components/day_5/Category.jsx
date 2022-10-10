@@ -1,10 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Product_card from './Product_card';
-import { useDispatch } from 'react-redux';
-import { add } from '../../store/cartSlice';
 import DonateBanner from './DonateBanner';
-import { Box, Button, ButtonGroup, Divider, Flex, Input, Text, Select } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import Pagination from './Pagination';
 import SelectCategory from './SelectCategory';
 import Filter from './Filter';
@@ -15,8 +13,6 @@ import Filter from './Filter';
 
 
 function Category(props) {
-
-    const dispatch = useDispatch()
 
     const [origin , setOrigin] = useState([])
     const [Resdata, setResData] = useState([])
@@ -59,7 +55,6 @@ function Category(props) {
     const Searchitem = (val)=>{
         let Resdata =[...origin]
         let OutData = Resdata.filter((el)=>{
-            console.log(el.title.toLowerCase())
             return el.title.toLowerCase().includes(val.toLowerCase() )
         })
         setResData(OutData)
@@ -102,7 +97,9 @@ function Category(props) {
                                 key={ind + "!@#"}
                                 image={el.images[0]}
                                 title={el.title}
-                                price={el.price} />
+                                price={el.price}
+                                arr ={el}
+                                />
                         })
                     }
                 </Flex>

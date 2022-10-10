@@ -5,6 +5,7 @@ import styles from "../../colors.module.css"
 import { AppContext } from "../../contextProvider/ContextProvider"
 import { LOGOUT } from '../../contextProvider/action';
 import { BsFillCartFill } from "react-icons/bs"
+import { useSelector } from "react-redux"
 
 import {
     Box,
@@ -30,6 +31,8 @@ import {
 
 
 const Header = () => {
+
+    const cartItem = useSelector((state) => state.cart)
 
     const { state, dispatch } = useContext(AppContext)
 
@@ -132,22 +135,28 @@ const Header = () => {
                 <PopoverTrigger>
                     <Avatar as="Button" h={10} w={10} src={state.user.avatar} />
                 </PopoverTrigger>
-                <Button mx={2}>
-                    <Icon as={BsFillCartFill} fontSize="2xl" color="#9C3353"/>
-                    <Text
-                     position="absolute" 
-                     top={0} 
-                     right={0} 
-                     p={0} 
-                     width="22px"
-                     height="22px"
-                     lineHeight="22px"
-                     borderRadius="full" 
-                     fontSize="xs"
-                     bg="teal"
-                     color="whiteAlpha.900"
-                     >0</Text>
-                </Button>
+                {state.isAuth &&
+                    <NavLink to="/cart">
+                        <Button mx={2}>
+                            <Icon as={BsFillCartFill} fontSize="2xl" color="#9C3353" />
+                            <Text
+                                position="absolute"
+                                top={0}
+                                right={0}
+                                p={0}
+                                width="22px"
+                                height="22px"
+                                lineHeight="22px"
+                                borderRadius="full"
+                                fontSize="xs"
+                                bg="teal"
+                                color="whiteAlpha.900"
+                            >{cartItem.length}</Text>
+                        </Button>
+                    </NavLink>
+
+                }
+
                 <PopoverContent w="150px">
                     <PopoverArrow />
                     <PopoverBody>
