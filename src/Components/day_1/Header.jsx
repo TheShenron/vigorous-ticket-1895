@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import styles from "../../colors.module.css"
 import { AppContext } from "../../contextProvider/ContextProvider"
 import { LOGOUT } from '../../contextProvider/action';
+import { BsFillCartFill } from "react-icons/bs"
 
 import {
     Box,
@@ -22,13 +23,15 @@ import {
     Divider,
     Center,
     Tooltip,
-    Badge
+    Badge,
+    Tag,
+    Text
 } from "@chakra-ui/react"
 
 
 const Header = () => {
 
-    const { state , dispatch } = useContext(AppContext)
+    const { state, dispatch } = useContext(AppContext)
 
     const [tooltips, setTooltips] = useState(false)
     const shows = (e) => {
@@ -129,14 +132,30 @@ const Header = () => {
                 <PopoverTrigger>
                     <Avatar as="Button" h={10} w={10} src={state.user.avatar} />
                 </PopoverTrigger>
+                <Button mx={2}>
+                    <Icon as={BsFillCartFill} fontSize="2xl" color="#9C3353"/>
+                    <Text
+                     position="absolute" 
+                     top={0} 
+                     right={0} 
+                     p={0} 
+                     width="22px"
+                     height="22px"
+                     lineHeight="22px"
+                     borderRadius="full" 
+                     fontSize="xs"
+                     bg="teal"
+                     color="whiteAlpha.900"
+                     >0</Text>
+                </Button>
                 <PopoverContent w="150px">
                     <PopoverArrow />
                     <PopoverBody>
                         {state.isAuth ? (
                             <Flex>
                                 <Spacer />
-                                <NavLink onClick={()=>{
-                                    dispatch({type : LOGOUT})
+                                <NavLink onClick={() => {
+                                    dispatch({ type: LOGOUT })
                                 }} to="/">Logout</NavLink>
                                 <Spacer />
                             </Flex>
