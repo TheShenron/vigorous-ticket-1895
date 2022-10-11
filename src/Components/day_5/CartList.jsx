@@ -11,11 +11,11 @@ function CartList({data : d , HandleRemove , Handletotle , dataList}) {
     
     const findTotle = ()=>{
         let list = document.querySelectorAll(".opt");
-        console.log(list)
+        // console.log(list)
         let totle = 0;
         list.forEach((el,ind)=>{
             // totle += parseInt(el.value)
-            console.log(el.value , dataList[ind].price )
+            // console.log(el.value , dataList[ind].price )
             totle += parseInt(el.value) * dataList[ind].price 
         })
         // console.log(totle)
