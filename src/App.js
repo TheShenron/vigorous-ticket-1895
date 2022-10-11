@@ -3,14 +3,16 @@
 //MY IMPORT AND EXPORT
 import Allroutes from './routes/Allroutes';
 import Header from "./Components/day_1/Header"
+import store from './store/store';
+import { Provider } from "react-redux"
 
 function App() {
 
   return (
-    <>
+    <Provider store={store}>
       <Header />
       <Allroutes />
-    </>
+    </Provider>
   )
   // return (
   //   <div className="App">

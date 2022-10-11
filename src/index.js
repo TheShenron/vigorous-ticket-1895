@@ -7,18 +7,22 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom"
 import { ChakraProvider } from '@chakra-ui/react';
 import ContextProvider from './contextProvider/ContextProvider';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ChakraProvider>
-    <ContextProvider>
-      <BrowserRouter>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      </BrowserRouter>
-    </ContextProvider>
-  </ChakraProvider>
+  <GoogleOAuthProvider clientId='203777550442-g8l716tt85eb7mm5pejp6ndtrob3mnl7.apps.googleusercontent.com'>
+    <ChakraProvider>
+      <ContextProvider>
+        <BrowserRouter>
+          <React.StrictMode>
+            <App /> 
+          </React.StrictMode>
+        </BrowserRouter>
+      </ContextProvider>
+    </ChakraProvider>
+  </GoogleOAuthProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

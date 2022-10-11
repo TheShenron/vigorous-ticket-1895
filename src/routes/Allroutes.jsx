@@ -10,6 +10,7 @@ import Fundraiser from "./pages/Fundraiser";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ERRORPAGE from './pages/ERRORPAGE';
+import Cart from './pages/Cart';
 
 function Allroutes(props) {
     return (
@@ -27,6 +28,11 @@ function Allroutes(props) {
             <Route path='/funding' element={<Fundraiser/>} />
             <Route path='/login' element={<Login/>} />
             <Route path='/register' element={<Register/>} />
+            <Route path='/cart' element={
+                <PrivateRoute>
+                    <Cart/>
+                </PrivateRoute>
+            } />
             <Route path='*' element={<ERRORPAGE/>} />
 
         </Routes>

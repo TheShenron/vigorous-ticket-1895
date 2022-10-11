@@ -1,6 +1,7 @@
 import React from 'react';
 import PageInPro from "../../Components/ErrorPage/PageInPro"
 import { Container } from '@chakra-ui/react';
+import Category from '../../Components/day_5/Category';
 
 function Pricing(props) {
     return (
@@ -9,7 +10,8 @@ function Pricing(props) {
             maxW="full"
             p="0"
         >
-            <PageInPro/>
+            {/* <PageInPro/> */}
+            <Category/>
         </Container>
     );
 }
