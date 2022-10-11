@@ -2,65 +2,36 @@ import { Box, Flex, Image, Select, Text, Button, Icon, Input, InputGroup } from 
 import React, { useEffect, useState } from 'react';
 import { BsFillShieldLockFill } from "react-icons/bs"
 import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import { remove } from "../../store/cartSlice"
+import CartList from './CartList';
 
 
-const Card = (img, title, price, desc , HandleQTY) => (
-
-    <Flex justify="space-evenly" p={5} shadow="xs" key={price*.5}>
-        <Flex>
-            <Box>
-                <Image src={img} alt="ProductIMG" w="250px" borderRadius={5} />
-            </Box>
-            <Box px={3}>
-                <Text fontWeight="bold" fontSize="md">{title}</Text>
-                <Text color="gray" py={2}>{desc}</Text>
-            </Box>
-        </Flex>
-        <Box>
-            <Text fontWeight="bold">Each</Text>
-            <Text py={2}> ${price}</Text>
-        </Box>
-        <Box>
-            <Text fontWeight="bold">Quantity</Text>
-            <Select py={2} size="sm" onChange={()=>HandleQTY()} className="opt">
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-                <option value={4}>4</option>
-                <option value={5}>5</option>
-            </Select>
-        </Box>
-    </Flex>
-)
 
 
 function CartPageCard() {
 
     const cartItem = useSelector(state => state.cart)
-    // console.log(cartItem)
-
+    
     const [total , setTotal] = useState(0)
 
-    const HandleQTY = ()=>{
-        let list = document.querySelectorAll(".opt")
-        let t = 0
-        list.forEach((el,ind)=>{
-            t += el.value*cartItem[ind].price
-        })
-        setTotal(t)
+    const dispatch = useDispatch()
+
+    const HandleRemove = (id)=>{
+        dispatch(remove(id))
     }
 
-    useEffect(()=>{
-        HandleQTY()
-    } , [])
+    const Handletotle = (val)=>{
+        setTotal(val)
+    }
 
 
     return (
         <>
             <Box w="65%">
 
-                {cartItem.length === 0 ? <h1>No Product Avilable</h1> : cartItem.map(el => {
-                    return Card(el.images[0], el.title, el.price, el.category.name , HandleQTY)
+                {cartItem.length === 0 ? <h1>No Product Avilable</h1> : cartItem.map((el ) => {
+                    return <CartList data={el} HandleRemove={HandleRemove} Handletotle={Handletotle} dataList={cartItem}/>
                 })}
 
             </Box>
@@ -86,7 +57,7 @@ function CartPageCard() {
                     </Flex>
                     <Flex justify="space-between" py={2}>
                         <Text fontWeight="bold">Esitmated Total</Text>
-                        <Text fontWeight="bold">${total}</Text>
+                        <Text fontWeight="bold">${cartItem.length===0?0:total}</Text>
                     </Flex>
                     
                     <Flex justify="flex-end" my={5}>
